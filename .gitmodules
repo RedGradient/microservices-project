@@ -1,0 +1,6 @@
+[submodule "AuthMicroservice"]
+	path = AuthMicroservice
+	url = https://github.com/RedGradientProjects/AuthMicroservice
+[submodule "APIMicroservice"]
+	path = APIMicroservice
+	url = https://github.com/RedGradient/APIMicroservice
