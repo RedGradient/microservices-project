@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "name": "KrakenD API Gateway",
+  "endpoints": [
+    {
+      "endpoint": "/users/{id}",
+      "backend": [
+        {
+          "url_pattern": "/users/{id}",
+          "host": ["http://api-service-1:8001"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/orders/{id}",
+      "backend": [
+        {
+          "url_pattern": "/orders/{id}",
+          "host": ["http://api-service-2:8001"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/user-data/{user-id}",
+      "backend": [
+        {
+          "url_pattern": "/users/{user-id}",
+          "host": ["http://api-service-1:8001"]
+        },
+        {
+          "url_pattern": "/orders/{user-id}",
+          "host": ["http://api-service-2:8001"]
+        }
+      ]
+    }
+  ]
+}

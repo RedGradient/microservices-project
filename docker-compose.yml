@@ -1,0 +1,57 @@
+services:
+  krakend:
+    image: devopsfaith/krakend:2.9
+    container_name: krakend_gateway
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./krakend.json:/etc/krakend/krakend.json
+    command: ["run", "-dc", "/etc/krakend/krakend.json"]
+    networks:
+      - my_network
+
+  auth-service:
+    build:
+      context: ./AuthMicroservice
+      dockerfile: Dockerfile
+    container_name: auth-service
+    restart: always
+    ports:
+      - "8000:8000"
+    networks:
+      - my_network
+
+  api-service-1:
+    build:
+      context: ./APIMicroservice
+      dockerfile: Dockerfile
+    container_name: api-service-1
+    restart: always
+#    ports:
+#      - "8001:8001"
+    environment:
+      - AUTH_HOST=auth-service
+    networks:
+      - my_network
+    depends_on:
+      - krakend
+
+  api-service-2:
+    build:
+      context: ./APIMicroservice
+      dockerfile: Dockerfile
+    container_name: api-service-2
+    restart: always
+#    ports:
+#      - "8002:8001"
+    environment:
+      - AUTH_HOST=auth-service
+    networks:
+      - my_network
+    depends_on:
+      - krakend
+
+networks:
+  my_network:
+    driver: bridge
