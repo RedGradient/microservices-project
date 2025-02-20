@@ -17,8 +17,6 @@ services:
       dockerfile: Dockerfile
     container_name: auth-service
     restart: always
-    ports:
-      - "8000:8000"
     networks:
       - my_network
 
@@ -28,8 +26,6 @@ services:
       dockerfile: Dockerfile
     container_name: api-service-1
     restart: always
-#    ports:
-#      - "8001:8001"
     environment:
       - AUTH_HOST=auth-service
     networks:
@@ -43,8 +39,6 @@ services:
       dockerfile: Dockerfile
     container_name: api-service-2
     restart: always
-#    ports:
-#      - "8002:8001"
     environment:
       - AUTH_HOST=auth-service
     networks:
